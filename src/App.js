@@ -1,18 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import FunctionalComp from './Components/two'
+// import logo from './logo.svg';
+import axios from 'axios'
 import './App.css';
+import { Link } from 'react-router-dom'
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      info: ''
+    }
+  }
+  buttonClicK = () => {
+    axios.get('/info').then((x) => {
+      this.setState({
+        info: x
+      })
+    })
+  }
+
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Link to='/stateful'>
+          <button>
+            Go To first page
+          </button>
+        </Link>
+        <Link to="/funcitonal">
+          <button>Go To Second page</button>
+        </Link>
+        {this.state.info}
+
+        <button onClick={this.buttonClick}>Get Info</button>
       </div>
     );
   }
